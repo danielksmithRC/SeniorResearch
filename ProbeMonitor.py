@@ -1,25 +1,27 @@
+
 import csv
 import time
 import subprocess
 import sys
 
 
-MAC = '38:DE:AD:DB:BA:64'
-cmd = "sudo airodump-ng -w Research/AiroDumpOutput --output-format csv wlan0"
+MAC = 'XX:XX:XX:XX:XX:XX'
+EndProgram = time.time() + 60 * 5
 
 def deciferClientFile():
     with open('ClientData.csv') as fileRead:
         reader = csv.reader(fileRead)
         
+        
         for row in reader:
             if row:
                 if row[0] == MAC:
                     print row
-                    file.write(str(row) + "\n")
-                    #clientData.append(str(row))
+                    clientData.append(str(row))
+                    
+                    
                     
 
-        
         fileRead.close()
         
                 
@@ -49,17 +51,21 @@ def makeClientFile():
 
 def mainLoop():
 
-    while True:
+    
+
+    while time.time() < EndProgram:
+        file = open("ClientFinalData.txt", "w")
         makeClientFile()
         deciferClientFile()
-        #for x in clientData:
-            #print(x)
-            #file.write(x)
+
+        for row in clientData:
+            file.write(row + "\n")
+            
+        
+        file.close()
         time.sleep(3)
+        
 
-
-file = open('ClientFinalData.txt', 'w')
-#clientData = []
-#subprocess.run(cmd, shell=True)
-#time.sleep(3)
+clientData = []
 mainLoop()
+ 
