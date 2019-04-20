@@ -28,6 +28,8 @@ PROCEDURE:
 	BEFORE REPEATING
 
 OUTPUT:
+	
+	
 	The output will look like this:
 
 		['XX:XX:XX:XX:XX:XX', ' 2019-04-20 00:04:05', ' 2019-04-20 00:04:05', ' -45', '        6', ' (not associated) ', 'someWifi']
