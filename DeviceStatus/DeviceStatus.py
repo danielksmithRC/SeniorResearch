@@ -6,7 +6,7 @@ import datetime
 #from datetime import datetime
 
 
-MAC = 'D4:61:9D:4C:AD:F2'
+MAC = 'XX:XX:XX:XX:XX:XX'
 EndProgram = time.time() + 60 * 5
 
 
