@@ -3,16 +3,12 @@ import time
 import subprocess
 import sys
 import datetime
-#from datetime import datetime
-
-
-MAC = 'XX:XX:XX:XX:XX:XX'
-EndProgram = time.time() + 60 * 5
 
 
 #PRE: Must have a file called 'ClientData.csv' that has only the bottom portion
-#      of the airodump-ng output
-#POST: This will will for the client with the MAC address defined in the variable
+#      of the airodump-ng output. This also takes in a variable called currDateTime
+#      that is a datetime object. It must be delay seconds behind the current time
+#POST: This will look for the client with the MAC address defined in the variable
 #        MAC. If that device is there it will append  1 and a time stamp otherwise
 #        it will append 0 and a time stamp to clientData
 def deciferClientFile(currDateTime):
@@ -64,23 +60,27 @@ def makeClientFile():
         fileRead.close()
     
 
+#PRE:  MAC and EndProgram must be set
+#POST: This runs the main loop for the program. After the main loop of the
+#        program is finished it writes the clientData array to a text file called
+#        "ClientStatus.txt
 def mainLoop():
 
+    # A delay of 5 seconds gives enough time to reach the TP-WN722N and still
+    #   consider it as present. 
     delay = 5
 
     while time.time() < EndProgram:
 
         currDateTime = datetime.datetime.now() - datetime.timedelta(seconds=delay)
-        
-        #print("currDateTime Before: " + str(currDateDummpy))
-        #This will allow for 'AiroDumpOutput-01.csv to update
+
+
         time.sleep(delay)
         makeClientFile()
         deciferClientFile(currDateTime)
         
 
-    #Once the program is finished we want to write this data to
-    # "ClientFinalData.txt
+    # Now clientStatus array needs to be written to "ClientStatus.txt" 
     file = open("ClientStatus.txt", "w")
     
     for row in clientStatus:
@@ -88,6 +88,12 @@ def mainLoop():
 
     file.close()
 
-clientStatus = []
-mainLoop()
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print "Please enter the MAC address of the device you are monitoring."
+    else:
+        MAC = sys.argv[1]
+        EndProgram = time.time() + 60 * 5
+        clientStatus = []
+        mainLoop()
  

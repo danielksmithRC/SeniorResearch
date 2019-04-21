@@ -21,7 +21,9 @@ PROCEDURE:
 	3) Open two terminals and make sure you are in SeniorResearch directory. 
 		
 		Terminal_1:$ sudo airodump-ng -w AiroDumpOutput --output-format csv wlan0
-		Terminal_2:$ python DeviceStatus.py
+		Terminal_2:$ python DeviceStatus.py XX:XX:XX:XX:XX:XX
+
+		Where XX:XX:XX:XX:XX:XX is the MAC address of the device you are monitoring 
 	
 	4) Execute Terminal_1 wait a few seconds then execute Terminal_2
 	5) This program will run for 5 min. This is just a little longer than airodump-ng runs for

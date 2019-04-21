@@ -1,8 +1,8 @@
 ABOUT:
 
-	This program is meant to test wifi probe signal strength for a single device. It uses the output 
+	This program is designed to see if a specific device has come in range of an AP. It uses the output 
 	from airodump-ng. For more information on what the data is look up the documentation for
-	airodump-ng  
+	airodump-ng. 
 
 
 REQUIREMENTS:
@@ -21,12 +21,14 @@ PROCEDURE:
 	3) Open two terminals and make sure you are in SeniorResearch directory. 
 		
 		Terminal_1:$ sudo airodump-ng -w AiroDumpOutput --output-format csv wlan0
-		Terminal_2:$ python ProbeMonitor.py
+		Terminal_2:$ python ProbeMonitor.py XX:XX:XX:XX:XX:XX
+
+		Where XX:XX:XX:XX:XX:XX is the MAC address of the device you are monitoring 
 	
 	4) Execute Terminal_1 wait a few seconds then execute Terminal_2
-	5) This program will run for 5 min. This is a little longer than airodump-ng runs for. 
+	5) This program will run for 5 min. This is just a little longer than airodump-ng runs for
 
-	TO RUN THE PROCEDURE AGAIN YOU MUST DELETE ALL THE FILES EXCEPT FOR ProbeMonitor.py and README.md
+	TO RUN THE PROCEDURE AGAIN YOU MUST DELETE ALL THE FILES EXCEPT FOR DeviceStatus.py and README.md
 	BEFORE REPEATING
 
 OUTPUT:
@@ -34,14 +36,11 @@ OUTPUT:
 	
 	The output on the terminal will look like this:
 
-		['XX:XX:XX:XX:XX:XX', ' 2019-04-20 00:04:05', ' 2019-04-20 00:04:05', ' -45', '        6', ' (not associated) ', 'someWifi']
+		MAC: XX:XX:XX:XX:XX:XX Power:  -51 TimeStamp: 2019-04-21 01:46:11.292740
 	
-	This is what it means:
-		
-		[Client_MAC, First Seen, Last Seen, Power, Frame, Probe]
-	
-	The higher the absolute value of power is the farther away the device is getting from the wifi adapter. 
+	Where MAC is the MAC address of the device your are monitoring. Power is in the form of dbm. And TimeStamp
+	was when that power level was read.
 
 
-	Once the program is finshed there will be a text file generated called "ClientFinalData.txt" which
+	Once the program is finshed there will be a text file generated called "ClientStatus.txt" which
 	will have all the outputs from the terminal.
